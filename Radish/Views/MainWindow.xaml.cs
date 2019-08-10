@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Radish
+namespace Radish.Views
 {
     public class MainWindow : Window
     {
