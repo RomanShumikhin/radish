@@ -31,8 +31,10 @@ namespace Radish
         // container, etc.
         private static void AppMain(Application app, string[] args)
         {
+            RedisUtils utils = new RedisUtils();
+
             var builder = new ContainerBuilder();
-            builder.RegisterType<RedisUtils>().As<IRedisUtils>();
+            builder.RegisterInstance(utils).As<IRedisUtils>().ExternallyOwned();
             builder.UseAutofacDependencyResolver();
 
             var window = new MainWindow

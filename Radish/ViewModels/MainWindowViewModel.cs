@@ -17,6 +17,7 @@ namespace Radish.ViewModels
         public MainWindowViewModel()
         {
             _redisConn = Locator.Current.GetService<IRedisUtils>();
+            _redisConn.DbConnected += DbConnected;
             ConnectCommand = ReactiveCommand.Create(RunConnectWindow);
         }
 
@@ -37,6 +38,11 @@ namespace Radish.ViewModels
         public void AppExit()
         {
             App.Current.Exit();
+        }
+
+        private void DbConnected(object sender, EventArgs e)
+        {
+            Console.WriteLine("Main - The db was connected.");
         }
     }
 }
