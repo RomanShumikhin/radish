@@ -2,11 +2,11 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Radish
+namespace Radish.ViewModels.ConnWindow
 {
-    public class About : Window
+    public class ConnWindow : Window
     {
-        public About()
+        public ConnWindow()
         {
             InitializeComponent();
         }
