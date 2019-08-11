@@ -3,11 +3,18 @@ using Avalonia;
 using Avalonia.Logging.Serilog;
 using Radish.ViewModels;
 using Radish.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Radish.Interfaces;
+using Radish.DIServices;
+using Autofac;
+using Splat.Autofac;
 
 namespace Radish
 {
     class Program
     {
+        // private static IContainer Container { get; set; }
+
         // Initialization code. Don't use any Avalonia, third-party APIs or any
         // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
         // yet and stuff might break.
@@ -24,11 +31,15 @@ namespace Radish
         // container, etc.
         private static void AppMain(Application app, string[] args)
         {
+            var builder = new ContainerBuilder();
+            builder.RegisterType<RedisUtils>().As<IRedisUtils>();
+            builder.UseAutofacDependencyResolver();
+
             var window = new MainWindow
             {
                 DataContext = new MainWindowViewModel(),
             };
-
+            
             app.Run(window);
         }
     }

@@ -1,0 +1,28 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        MinHeight="450" MinWidth="800"
+        x:Class="Radish.ViewModels.ConnWindow.ConnWindow"
+        xmlns:vm="clr-namespace:Radish.ViewModels;assembly=Radish"
+        Title="Open Connection">
+  
+    <Design.DataContext>
+        <vm:ConnWindowViewModel/>
+    </Design.DataContext>
+
+    <StackPanel>
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="Host" />
+        <TextBox Width ="250" Text="{Binding Host}" />
+      </StackPanel>
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="Port" />
+        <TextBox Width ="250" Text="{Binding Port}" />
+      </StackPanel>
+      <StackPanel Orientation="Horizontal">
+        <Button Width="200" Command="{Binding AttemptLogin}" >Connect</Button>
+      </StackPanel>
+    </StackPanel>
+</Window>
