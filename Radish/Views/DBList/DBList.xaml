@@ -9,11 +9,14 @@
   <Design.DataContext>
     <vm:DBListViewModel/>
   </Design.DataContext>
+  <StackPanel>
+  <TextBlock Text="DB List" />
   <ItemsControl Items="{Binding ListOfDbNumbers}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
-          <TextBlock Content="{Binding DbDisplay}"/>
+          <Button Content="{Binding DbDisplay}" Background="White"/>
         </DataTemplate>
       </ItemsControl.ItemTemplate>
     </ItemsControl>
+  </StackPanel>
 </UserControl>

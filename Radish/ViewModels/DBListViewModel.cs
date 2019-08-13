@@ -15,15 +15,16 @@ namespace Radish.ViewModels
         {
             _redisConn = Locator.Current.GetService<IRedisUtils>();
             _redisConn.DbConnected += DbConnected;
+            this.ListOfDbNumbers = new ObservableCollection<DbListItem>();
         }
 
-        public ObservableCollection<DbListItem> ListOfDbNumbers = new ObservableCollection<DbListItem>();
+        public ObservableCollection<DbListItem> ListOfDbNumbers { get; }
 
         private void DbConnected(object sender, EventArgs e)
         {
             Console.WriteLine("DBList - The db was connected.");
             this.ListOfDbNumbers.Clear();
-            foreach(var dbi in _redisConn.GetDatabases())
+            foreach (var dbi in _redisConn.GetDatabases())
             {
                 DbListItem item = new DbListItem(dbi);
                 this.ListOfDbNumbers.Add(item);

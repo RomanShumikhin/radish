@@ -2,8 +2,8 @@ namespace Radish.Models
 {
     public class DbListItem
     {
-        public int DbNumber { get; private set; }
-        public string DbDisplay { get; private set; }
+        public int DbNumber { get; set; }
+        public string DbDisplay { get; set; }
 
         public DbListItem(int dbNumber)
         {

@@ -8,6 +8,10 @@ namespace Radish.Interfaces
     {
          event EventHandler DbConnected;
 
+         event EventHandler DbSelected;
+
+         void SelectDb(int dbNumber);
+
          bool Connect(string host, int port);
 
          bool Connect(string host, int port, ConfigurationOptions configOptions);

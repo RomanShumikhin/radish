@@ -13,9 +13,13 @@ namespace Radish.DIServices
 
         private int _port = 0;
 
+        private int _selectedDb = 0;
+
         private ConfigurationOptions _configOptions = null;
 
         public event EventHandler DbConnected;
+
+        public event EventHandler DbSelected;
 
         public RedisUtils()
         {
@@ -26,6 +30,18 @@ namespace Radish.DIServices
         {
             EventHandler handler = DbConnected;
             handler?.Invoke(this, e);
+        }
+
+        protected virtual void OnDbSelected(EventArgs e)
+        {
+            EventHandler handler = DbSelected;
+            handler?.Invoke(this._selectedDb, e);
+        }
+
+        public void SelectDb(int dbNumber)
+        {
+            this._selectedDb = dbNumber;
+            this.OnDbSelected(new EventArgs());
         }
 
         public bool Connect(string host, int port)
