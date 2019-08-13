@@ -8,10 +8,21 @@ using Radish.ViewModels;
 
 namespace Radish
 {
+    /// <summary>
+    /// This is the View Locator class
+    /// </summary>
     public class ViewLocator : IDataTemplate
     {
+        /// <summary>
+        /// Whether the view support recycling.
+        /// </summary>
         public bool SupportsRecycling => false;
 
+        /// <summary>
+        /// Builds a new instance of the view model
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public IControl Build(object data)
         {
             var name = data.GetType().FullName.Replace("ViewModel", "View");
@@ -27,6 +38,11 @@ namespace Radish
             }
         }
 
+        /// <summary>
+        /// Whether or not is is a view model base
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool Match(object data)
         {
             return data is ViewModelBase;

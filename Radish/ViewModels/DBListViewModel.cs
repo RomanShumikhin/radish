@@ -7,10 +7,19 @@ using Splat;
 
 namespace Radish.ViewModels
 {
+    /// <summary>
+    /// The DB List View Model
+    /// </summary>
     public class DBListViewModel : ViewModelBase
     {
+        /// <summary>
+        /// The redis utility.
+        /// </summary>
         private readonly IRedisUtils _redisConn;
 
+        /// <summary>
+        /// The constructor for the DB List View Model
+        /// </summary>
         public DBListViewModel()
         {
             _redisConn = Locator.Current.GetService<IRedisUtils>();
@@ -18,8 +27,17 @@ namespace Radish.ViewModels
             this.ListOfDbNumbers = new ObservableCollection<DbListItem>();
         }
 
+        /// <summary>
+        /// The List of DB Numbers
+        /// </summary>
+        /// <value></value>
         public ObservableCollection<DbListItem> ListOfDbNumbers { get; }
 
+        /// <summary>
+        /// The DB connected event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DbConnected(object sender, EventArgs e)
         {
             Console.WriteLine("DBList - The db was connected.");

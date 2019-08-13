@@ -11,6 +11,9 @@ using Splat.Autofac;
 
 namespace Radish
 {
+    /// <summary>
+    /// The main program.
+    /// </summary>
     class Program
     {
         // private static IContainer Container { get; set; }
