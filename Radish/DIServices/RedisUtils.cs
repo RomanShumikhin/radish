@@ -13,11 +13,35 @@ namespace Radish.DIServices
 
         private int _port = 0;
 
+        private int _selectedDb = 0;
+
         private ConfigurationOptions _configOptions = null;
+
+        public event EventHandler DbConnected;
+
+        public event EventHandler DbSelected;
 
         public RedisUtils()
         {
 
+        }
+
+        protected virtual void OnDbConnected(EventArgs e)
+        {
+            EventHandler handler = DbConnected;
+            handler?.Invoke(this, e);
+        }
+
+        protected virtual void OnDbSelected(EventArgs e)
+        {
+            EventHandler handler = DbSelected;
+            handler?.Invoke(this._selectedDb, e);
+        }
+
+        public void SelectDb(int dbNumber)
+        {
+            this._selectedDb = dbNumber;
+            this.OnDbSelected(new EventArgs());
         }
 
         public bool Connect(string host, int port)
@@ -29,6 +53,7 @@ namespace Radish.DIServices
             _port = port;
             _configOptions = ConfigurationOptions.Parse(_redis.Configuration);
             Console.WriteLine(_redis.GetStatus());
+            this.OnDbConnected(new EventArgs());
             return retval;
         }
 
@@ -40,6 +65,7 @@ namespace Radish.DIServices
             _port = port;
             _redis = ConnectionMultiplexer.Connect(_configOptions);
             Console.WriteLine(_redis.GetStatus());
+            this.OnDbConnected(new EventArgs());
             return retval;
         }
 
