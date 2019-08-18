@@ -53,6 +53,6 @@ namespace Radish.Interfaces
         /// </summary>
         /// <param name="db"></param>
         /// <returns></returns>
-         List<string> GetKeys(int db);
+         List<string> GetKeys();
     }
 }

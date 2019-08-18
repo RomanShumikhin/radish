@@ -149,12 +149,12 @@ namespace Radish.DIServices
         /// </summary>
         /// <param name="db"></param>
         /// <returns></returns>
-        public List<string> GetKeys(int db)
+        public List<string> GetKeys()
         {
             List<string> myKeys = new List<string>();
             if (_redis != null)
             {
-                foreach (var key in _redis.GetServer(_host, _port).Keys(db))
+                foreach (var key in _redis.GetServer(_host, _port).Keys(this._selectedDb))
                 {
                     myKeys.Add(key);
                 }

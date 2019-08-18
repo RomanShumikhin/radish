@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Radish.ViewModels;
 
 namespace Radish.Keys
 {
@@ -14,6 +15,7 @@ namespace Radish.Keys
         /// </summary>
         public KeyList()
         {
+            this.DataContext = new KeyListViewModel();
             InitializeComponent();
         }
 

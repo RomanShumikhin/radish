@@ -9,13 +9,13 @@ namespace Radish.Models
         /// The DB number
         /// </summary>
         /// <value></value>
-        public int DbNumber { get; set; }
+        public int DbNumber { get; private set; }
 
         /// <summary>
         /// The DB Display
         /// </summary>
         /// <value></value>
-        public string DbDisplay { get; set; }
+        public string DbDisplay { get; private set; }
 
         /// <summary>
         /// The constructor for the DB list item

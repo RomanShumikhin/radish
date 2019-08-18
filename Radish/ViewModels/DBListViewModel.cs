@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Avalonia.Controls;
 using Radish.Interfaces;
 using Radish.Models;
 using Splat;
@@ -16,6 +17,12 @@ namespace Radish.ViewModels
         /// The redis utility.
         /// </summary>
         private readonly IRedisUtils _redisConn;
+
+        /// <summary>
+        /// This is the selected db from the UI.
+        /// </summary>
+        /// <value></value>
+        public DbListItem SelectedDb { get; set; }
 
         /// <summary>
         /// The constructor for the DB List View Model
@@ -48,6 +55,16 @@ namespace Radish.ViewModels
                 this.ListOfDbNumbers.Add(item);
                 Console.WriteLine("DBList - Added" + dbi.ToString());
             }
+        }
+
+        /// <summary>
+        /// Selects the db.
+        /// </summary>
+        /// <param name="dbi"></param>
+        public void OnDbSelected()
+        {
+            Console.WriteLine("Selecting " + this.SelectedDb.DbDisplay);
+            _redisConn.SelectDb(this.SelectedDb.DbNumber);
         }
     }
 }
