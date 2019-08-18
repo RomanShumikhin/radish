@@ -4,19 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="clr-namespace:Radish.ViewModels;assembly=Radish"
-             MinHeight="450" MinWidth="800"
+             MinWidth="100"
              x:Class="Radish.DBList.DBList">
   <Design.DataContext>
     <vm:DBListViewModel/>
   </Design.DataContext>
   <StackPanel>
-  <TextBlock Text="DB List" />
-  <ItemsControl Items="{Binding ListOfDbNumbers}">
-      <ItemsControl.ItemTemplate>
-        <DataTemplate>
-          <Button Content="{Binding DbDisplay}" Background="White"/>
-        </DataTemplate>
-      </ItemsControl.ItemTemplate>
-    </ItemsControl>
+      <TextBlock Text="DB List" />
+      <StackPanel Orientation="Horizontal">
+        <DropDown Items="{Binding ListOfDbNumbers}" SelectedItem="{Binding SelectedDb}">
+          <DropDown.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding DbDisplay}" />
+            </DataTemplate>
+          </DropDown.ItemTemplate>
+        </DropDown>
+        <Button Command="{Binding OnDbSelected}">Select</Button>
+      </StackPanel>
   </StackPanel>
 </UserControl>
