@@ -18,7 +18,7 @@ namespace Radish.ViewModels
         /// This is our selected key.
         /// </summary>
         /// <value></value>
-        public KeyListItem SelectedKey {get; set;}
+        public KeyListItem SelectedKey { get; set; }
 
         /// <summary>
         /// The constructor for the DB List View Model

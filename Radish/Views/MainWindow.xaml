@@ -3,30 +3,42 @@
         xmlns:vm="clr-namespace:Radish.ViewModels;assembly=Radish"
         xmlns:dblist="clr-namespace:Radish.DBList;assembly=Radish"
         xmlns:keylist="clr-namespace:Radish.Keys;assembly=Radish"
+        xmlns:tb="clr-namespace:Radish.Views.Toolbar;assembly=Radish"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         MinHeight="450" MinWidth="800"
         x:Class="Radish.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Radish">
+        Title="Radish"
+        WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-    <StackPanel>
-        <Menu>
+
+    <Grid Margin="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="175" />
+            <ColumnDefinition Width="300*" MinWidth="300"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <MenuItem Header="_File">
                 <MenuItem Header="_Connect" Command="{Binding RunConnectWindow}" />
                 <Separator/>
                 <MenuItem Header="_Exit" Command="{Binding AppExit}" />
             </MenuItem>
         </Menu>
-        <StackPanel Orientation="Horizontal" Margin="15">
-            <StackPanel Margin="15">
-                <dblist:DBList />
-                <keylist:KeyList />
-            </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
+            <dblist:DBList />
+            <keylist:KeyList />
         </StackPanel>
-    </StackPanel>
+
+        <tb:TbContainer Grid.Row="1" Grid.Column="1" />
+    </Grid>
 </Window>

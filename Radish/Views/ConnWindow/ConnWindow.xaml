@@ -3,26 +3,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        MinHeight="450" MinWidth="800"
+        MinHeight="200" MinWidth="275"
         x:Class="Radish.ViewModels.ConnWindow.ConnWindow"
         xmlns:vm="clr-namespace:Radish.ViewModels;assembly=Radish"
-        Title="Open Connection">
+        Title="Open Connection"
+        WindowStartupLocation="CenterScreen">
   
     <Design.DataContext>
         <vm:ConnWindowViewModel/>
     </Design.DataContext>
 
-    <StackPanel>
-      <StackPanel Orientation="Horizontal">
-        <TextBlock Text="Host" />
-        <TextBox Width ="250" Text="{Binding Host}" />
-      </StackPanel>
-      <StackPanel Orientation="Horizontal">
-        <TextBlock Text="Port" />
-        <TextBox Width ="250" Text="{Binding Port}" />
-      </StackPanel>
-      <StackPanel Orientation="Horizontal">
-        <Button Width="200" Command="{Binding AttemptLogin}" >Connect</Button>
-      </StackPanel>
-    </StackPanel>
+    <Grid Margin="4">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="50" />
+        <ColumnDefinition Width="200*" MinWidth="200"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <TextBlock Text="Host" Grid.Row="0" Grid.Column="0" />
+      <TextBox Text="{Binding Host}" Grid.Row="0" Grid.Column="1" />
+
+      <TextBlock Text="Port" Grid.Row="1" Grid.Column="0" />
+      <TextBox Text="{Binding Port}" Grid.Row="1" Grid.Column="1" />
+
+      <Button Command="{Binding AttemptLogin}" Grid.Row="2" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="2">Connect</Button>
+    </Grid>
 </Window>
