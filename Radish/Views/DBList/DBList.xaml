@@ -19,7 +19,7 @@
             </DataTemplate>
           </DropDown.ItemTemplate>
         </DropDown>
-        <Button Width="160" Command="{Binding OnDbSelected}">Select</Button>
+        <Button Command="{Binding OnDbSelected}">Select</Button>
       </StackPanel>
   </StackPanel>
 </UserControl>

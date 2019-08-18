@@ -11,10 +11,10 @@
   </Design.DataContext>
   <StackPanel>
   <TextBlock Text="Key List" />
-  <ItemsControl Items="{Binding ListOfKeys}">
+  <ItemsControl Items="{Binding ListOfKeys}" SelectedItem="{Binding SelectedKey}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
-          <Button Content="{Binding KeyName}" Background="White" Foreground="Black" />
+          <TextBlock Text="{Binding KeyName}" />
         </DataTemplate>
       </ItemsControl.ItemTemplate>
     </ItemsControl>
