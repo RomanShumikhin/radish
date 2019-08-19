@@ -1,13 +1,13 @@
 using System;
 using Radish.Interfaces;
 using Splat;
+using System.Collections.Generic;
+using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace Radish.ViewModels
 {
-    /// <summary>
-    /// This is the view model for the connection window
-    /// </summary>
-    public class ConnWindowViewModel : ViewModelBase
+    public class AddKeyViewModel : ViewModelBase
     {
         /// <summary>
         /// The redis util
@@ -17,29 +17,27 @@ namespace Radish.ViewModels
         /// <summary>
         /// The conn window view model
         /// </summary>
-        public ConnWindowViewModel()
+        public AddKeyViewModel()
         {
             _redisConn = Locator.Current.GetService<IRedisUtils>();
-            this.Host = "localhost";
-            this.Port = "6379";
         }
 
         /// <summary>
         /// The redis host
         /// </summary>
-        public string Host { get; set; }
+        public string KeyName { get; set; }
 
         /// <summary>
         /// The redis port
         /// </summary>
-        public string Port { get; set; }
+        public string KeyValue { get; set; }
 
         /// <summary>
         /// Attempt to login
         /// </summary>
-        public void AttemptLogin()
+        public void AddKeyValue()
         {
-            _redisConn.Connect(this.Host, Convert.ToInt32(this.Port));
+            _redisConn.AddStringKeyValue(this.KeyName, this.KeyValue);
         }
     }
 }

@@ -2,25 +2,18 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using System;
+using Radish.ViewModels;
 
-namespace Radish.ViewModels.ConnWindow
+namespace Radish.Views.Toolbar
 {
-    /// <summary>
-    /// The connection window.
-    /// </summary>
-    public class ConnWindow : Window
+    public class AddKey : Window
     {
-        /// <summary>
-        /// The connection window constructor
-        /// </summary>
-        public ConnWindow()
+        public AddKey()
         {
+            DataContext = new AddKeyViewModel();
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Initializing the component.
-        /// </summary>
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
