@@ -1,4 +1,5 @@
 using Radish.Interfaces;
+using Radish.Models;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -46,11 +47,42 @@ namespace Radish.DIServices
         public event EventHandler DbSelected;
 
         /// <summary>
+        /// Key added
+        /// </summary>
+        public event EventHandler KeyAdded;
+
+        /// <summary>
+        /// The key is selected
+        /// </summary>
+        public event EventHandler KeySelected;
+
+        /// <summary>
         /// The redis utils constructor
         /// </summary>
         public RedisUtils()
         {
 
+        }
+
+        /// <summary>
+        /// This fires the key selected event.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="e"></param>
+        protected virtual void OnKeySelected(KeyListItem value, EventArgs e)
+        {
+            EventHandler handler = KeySelected;
+            handler?.Invoke(value, e);
+        }
+
+        /// <summary>
+        /// This fires the key added event.
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnKeyAdded(EventArgs e)
+        {
+            EventHandler handler = KeyAdded;
+            handler?.Invoke(this, e);
         }
 
         /// <summary>
@@ -165,6 +197,48 @@ namespace Radish.DIServices
             }
 
             return myKeys;
+        }
+
+        /// <summary>
+        /// This added string key value.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void AddStringKeyValue(string key, string value)
+        {
+            if (_redis != null)
+            {
+                var db = _redis.GetDatabase(this._selectedDb);
+                db.StringSet(key, value);
+                this.OnKeyAdded(new EventArgs());
+            }
+            else
+            {
+                throw new Exception("Not Connected to Redis");
+            }
+        }
+
+        /// <summary>
+        /// This gets the string value.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string GetStringKeyValue(string key)
+        {
+            string retval = string.Empty;
+
+            if (_redis != null)
+            {
+                var db = _redis.GetDatabase(this._selectedDb);
+                retval = db.StringGet(key);
+                this.OnKeySelected(new KeyListItem(key, retval), new EventArgs());
+            }
+            else
+            {
+                throw new Exception("Not Connected to Redis");
+            }
+
+            return retval;
         }
     }
 }

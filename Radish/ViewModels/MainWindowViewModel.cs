@@ -40,9 +40,9 @@ namespace Radish.ViewModels
         /// </summary>
         public void RunConnectWindow()
         {
-            var window = new ConnWindow.ConnWindow
+            var window = new ConnWindow.ConnWindow()
             {
-                DataContext = new ConnWindowViewModel(),
+                DataContext = new ConnWindowViewModel()
             };
 
             window.ShowDialog(Application.Current.MainWindow);

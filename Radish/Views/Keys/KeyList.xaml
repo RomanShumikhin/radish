@@ -11,6 +11,7 @@
   </Design.DataContext>
   <StackPanel>
   <TextBlock Text="Key List" />
+  <Button Command="{Binding SelectKey}">Open Key</Button>
   <ListBox Items="{Binding ListOfKeys}" SelectedItem="{Binding SelectedKey}">
       <ListBox.ItemTemplate>
         <DataTemplate>

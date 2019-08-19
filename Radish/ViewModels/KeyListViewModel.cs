@@ -21,12 +21,13 @@ namespace Radish.ViewModels
         public KeyListItem SelectedKey { get; set; }
 
         /// <summary>
-        /// The constructor for the DB List View Model
+        /// The constructor for the key List View Model
         /// </summary>
         public KeyListViewModel()
         {
             _redisConn = Locator.Current.GetService<IRedisUtils>();
             _redisConn.DbSelected += DbSelected;
+            _redisConn.KeyAdded += DbKeyAdded;
             this.ListOfKeys = new ObservableCollection<KeyListItem>();
         }
 
@@ -51,6 +52,31 @@ namespace Radish.ViewModels
                 this.ListOfKeys.Add(keyItem);
                 Console.WriteLine("Key List - Added: " + key);
             }
+        }
+
+        /// <summary>
+        /// This is for when a key is added.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DbKeyAdded(object sender, EventArgs e)
+        {
+            Console.WriteLine("DBKeys - Key was added");
+            this.ListOfKeys.Clear();
+            foreach (var key in _redisConn.GetKeys())
+            {
+                var keyItem = new KeyListItem(key);
+                this.ListOfKeys.Add(keyItem);
+                Console.WriteLine("Key List - Added: " + key);
+            }
+        }
+
+        /// <summary>
+        /// This selects the key to display.
+        /// </summary>
+        private void SelectKey()
+        {
+            _redisConn.GetStringKeyValue(SelectedKey.KeyName);
         }
     }
 }

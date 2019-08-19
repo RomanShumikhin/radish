@@ -20,6 +20,16 @@ namespace Radish.Interfaces
          event EventHandler DbSelected;
 
         /// <summary>
+        /// Key added
+        /// </summary>
+         event EventHandler KeyAdded;
+
+        /// <summary>
+        /// This is the event for selecting a key.
+        /// </summary>
+         event EventHandler KeySelected;
+
+        /// <summary>
         /// Selects the DB number.
         /// </summary>
         /// <param name="dbNumber"></param>
@@ -54,5 +64,19 @@ namespace Radish.Interfaces
         /// <param name="db"></param>
         /// <returns></returns>
          List<string> GetKeys();
+
+        /// <summary>
+        /// Sets a key value to the selected db
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+         void AddStringKeyValue(string key, string value);
+
+        /// <summary>
+        /// This is going to get the string value.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+         string GetStringKeyValue(string key);
     }
 }

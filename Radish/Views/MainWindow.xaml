@@ -4,6 +4,7 @@
         xmlns:dblist="clr-namespace:Radish.DBList;assembly=Radish"
         xmlns:keylist="clr-namespace:Radish.Keys;assembly=Radish"
         xmlns:tb="clr-namespace:Radish.Views.Toolbar;assembly=Radish"
+        xmlns:kv="clr-namespace:Radish.Views.ValueViewer;assembly=Radish"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -40,5 +41,7 @@
         </StackPanel>
 
         <tb:TbContainer Grid.Row="1" Grid.Column="1" />
+        
+        <kv:ViewKey Grid.Row="2" Grid.Column="1" />
     </Grid>
 </Window>

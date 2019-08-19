@@ -3,13 +3,13 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Radish.ViewModels;
 
-namespace Radish.Views.Toolbar
+namespace Radish.Views.ValueViewer
 {
-    public class TbContainer : UserControl
+    public class ViewKey : UserControl
     {
-        public TbContainer()
+        public ViewKey()
         {
-            DataContext = new TbContainerViewModel();
+            DataContext = new ViewKeyViewModel();
             InitializeComponent();
         }
 
