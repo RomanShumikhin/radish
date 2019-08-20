@@ -11,7 +11,7 @@
   </Design.DataContext>
   <StackPanel>
       <TextBlock Text="DB List" />
-      <StackPanel Orientation="Horizontal">
+      <StackPanel Orientation="Horizontal"  Spacing="5">
         <DropDown Items="{Binding ListOfDbNumbers}" SelectedItem="{Binding SelectedDb}">
           <DropDown.ItemTemplate>
             <DataTemplate>

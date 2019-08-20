@@ -9,10 +9,11 @@
   <Design.DataContext>
     <vm:KeyListViewModel/>
   </Design.DataContext>
-  <StackPanel>
-  <TextBlock Text="Key List" />
-  <Button Command="{Binding SelectKey}">Open Key</Button>
-  <ListBox Items="{Binding ListOfKeys}" SelectedItem="{Binding SelectedKey}">
+  <StackPanel Spacing="5">
+    <TextBlock Text="Key List" />
+    <Button Command="{Binding SelectKey}">Open Key</Button>
+    <Button Command="{Binding RefreshKeys}">Refresh Keys</Button>
+    <ListBox Items="{Binding ListOfKeys}" SelectedItem="{Binding SelectedKey}">
       <ListBox.ItemTemplate>
         <DataTemplate>
           <TextBlock Text="{Binding KeyName}" />

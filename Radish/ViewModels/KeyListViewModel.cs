@@ -44,14 +44,7 @@ namespace Radish.ViewModels
         /// <param name="e"></param>
         private void DbSelected(object sender, EventArgs e)
         {
-            Console.WriteLine("DBKeys - The db was connected.");
-            this.ListOfKeys.Clear();
-            foreach (var key in _redisConn.GetKeys())
-            {
-                var keyItem = new KeyListItem(key);
-                this.ListOfKeys.Add(keyItem);
-                Console.WriteLine("Key List - Added: " + key);
-            }
+            RefreshKeys();
         }
 
         /// <summary>
@@ -60,6 +53,11 @@ namespace Radish.ViewModels
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DbKeyAdded(object sender, EventArgs e)
+        {
+            RefreshKeys();
+        }
+
+        public void RefreshKeys()
         {
             Console.WriteLine("DBKeys - Key was added");
             this.ListOfKeys.Clear();
@@ -74,7 +72,7 @@ namespace Radish.ViewModels
         /// <summary>
         /// This selects the key to display.
         /// </summary>
-        private void SelectKey()
+        public void SelectKey()
         {
             _redisConn.GetStringKeyValue(SelectedKey.KeyName);
         }
