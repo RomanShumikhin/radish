@@ -26,6 +26,11 @@ namespace Radish.ViewModels.ConnWindow
             AvaloniaXamlLoader.Load(this);
         }
 
+        /// <summary>
+        /// Closes the window.
+        /// </summary>
+        /// <param name="sender">The sender</param>
+        /// <param name="e">The events args</param>
         private void CloseThis(object sender, EventArgs e)
         {
             this.Close();

@@ -1,12 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Avalonia;
 using Radish.Interfaces;
 using Radish.Models;
+using Radish.Views.Errors;
 using Splat;
+using ReactiveUI;
 
 namespace Radish.ViewModels
 {
+    /// <summary>
+    /// This is the view model for the key list window.
+    /// </summary>
     public class KeyListViewModel : ViewModelBase
     {
         /// <summary>
@@ -15,10 +21,15 @@ namespace Radish.ViewModels
         private readonly IRedisUtils _redisConn;
 
         /// <summary>
-        /// This is our selected key.
+        /// The property on whether to allow the clicking of the buttons.
         /// </summary>
-        /// <value></value>
-        public KeyListItem SelectedKey { get; set; }
+        /// <value>The property on whether to allow the clicking of the buttons.</value>
+        private bool _isButtonEnabled = false;
+
+        /// <summary>
+        /// The selected key
+        /// </summary>
+        private KeyListItem _selectedKey;
 
         /// <summary>
         /// The constructor for the key List View Model
@@ -38,27 +49,57 @@ namespace Radish.ViewModels
         public ObservableCollection<KeyListItem> ListOfKeys { get; }
 
         /// <summary>
+        /// The property on whether to allow the clicking of the buttons.
+        /// </summary>
+        /// <value>The property on whether to allow the clicking of the buttons.</value>
+        public bool IsButtonEnabled 
+        {
+            get => _isButtonEnabled;
+            set => this.RaiseAndSetIfChanged(ref _isButtonEnabled, value);
+        }
+
+        /// <summary>
+        /// This is our selected key.
+        /// </summary>
+        /// <value>The selected key</value>
+        public KeyListItem SelectedKey
+        {
+            get => _selectedKey;
+            set => this.RaiseAndSetIfChanged(ref _selectedKey, value);
+        }
+
+        /// <summary>
         /// The DB connected event handler
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender</param>
+        /// <param name="e">The event args</param>
         private void DbSelected(object sender, EventArgs e)
         {
             RefreshKeys();
+
+            if (this.ListOfKeys.Count > 0)
+            {
+                this.SelectedKey = this.ListOfKeys[0];
+                this.SelectKey();
+            }
         }
 
         /// <summary>
         /// This is for when a key is added.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender</param>
+        /// <param name="e">The event args</param>
         private void DbKeyAdded(object sender, EventArgs e)
         {
             RefreshKeys();
         }
 
+        /// <summary>
+        /// The method to refresh the keys.
+        /// </summary>
         public void RefreshKeys()
         {
+            this.IsButtonEnabled = true;
             Console.WriteLine("DBKeys - Key was added");
             this.ListOfKeys.Clear();
             foreach (var key in _redisConn.GetKeys())
@@ -74,7 +115,19 @@ namespace Radish.ViewModels
         /// </summary>
         public void SelectKey()
         {
-            _redisConn.GetStringKeyValue(SelectedKey.KeyName);
+            try
+            {
+                _redisConn.GetStringKeyValue(SelectedKey.KeyName);
+            }
+            catch (Exception ex)
+            {
+                var window = new ErrorWindow()
+                {
+                    DataContext = new ErrorWindowViewModel("Error", ex.Message)
+                };
+
+                window.ShowDialog(Application.Current.MainWindow);
+            }
         }
     }
 }
