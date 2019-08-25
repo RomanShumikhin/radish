@@ -1,5 +1,7 @@
 using System;
+using Avalonia;
 using Radish.Interfaces;
+using Radish.Views.Errors;
 using Splat;
 
 namespace Radish.ViewModels
@@ -39,7 +41,26 @@ namespace Radish.ViewModels
         /// </summary>
         public void AttemptLogin()
         {
-            _redisConn.Connect(this.Host, Convert.ToInt32(this.Port));
+            try
+            {
+                _redisConn.Connect(this.Host, Convert.ToInt32(this.Port));
+
+                var window = new ErrorWindow()
+                {
+                    DataContext = new ErrorWindowViewModel("Message", "Connection Successful")
+                };
+
+                window.ShowDialog(Application.Current.MainWindow);
+            }
+            catch (Exception ex)
+            {
+                var window = new ErrorWindow()
+                {
+                    DataContext = new ErrorWindowViewModel("Error", ex.Message)
+                };
+
+                window.ShowDialog(Application.Current.MainWindow);
+            }
         }
     }
 }

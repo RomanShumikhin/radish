@@ -4,9 +4,14 @@ using Splat;
 using System.Collections.Generic;
 using System.Collections;
 using System.Collections.ObjectModel;
+using Radish.Views.Errors;
+using Avalonia;
 
 namespace Radish.ViewModels
 {
+    /// <summary>
+    /// This is the View Model to add a key to the redis DB.
+    /// </summary>
     public class AddKeyViewModel : ViewModelBase
     {
         /// <summary>
@@ -37,7 +42,19 @@ namespace Radish.ViewModels
         /// </summary>
         public void AddKeyValue()
         {
-            _redisConn.AddStringKeyValue(this.KeyName, this.KeyValue);
+            try
+            {
+                _redisConn.AddStringKeyValue(this.KeyName, this.KeyValue);
+            }
+            catch (Exception ex)
+            {
+                var window = new ErrorWindow()
+                {
+                    DataContext = new ErrorWindowViewModel("Error", ex.Message)
+                };
+
+                window.ShowDialog(Application.Current.MainWindow);
+            }
         }
     }
 }

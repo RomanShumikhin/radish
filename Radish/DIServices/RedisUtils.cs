@@ -29,7 +29,7 @@ namespace Radish.DIServices
         /// <summary>
         /// The selected DB number
         /// </summary>
-        private int _selectedDb = 0;
+        private int _selectedDb = -1;
 
         /// <summary>
         /// The DB configuration options
@@ -67,8 +67,8 @@ namespace Radish.DIServices
         /// <summary>
         /// This fires the key selected event.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="e"></param>
+        /// <param name="value">the key value.</param>
+        /// <param name="e">The events args</param>
         protected virtual void OnKeySelected(KeyListItem value, EventArgs e)
         {
             EventHandler handler = KeySelected;
@@ -78,7 +78,7 @@ namespace Radish.DIServices
         /// <summary>
         /// This fires the key added event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The event args</param>
         protected virtual void OnKeyAdded(EventArgs e)
         {
             EventHandler handler = KeyAdded;
@@ -88,7 +88,7 @@ namespace Radish.DIServices
         /// <summary>
         /// Firing the on db connected.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The event args</param>
         protected virtual void OnDbConnected(EventArgs e)
         {
             EventHandler handler = DbConnected;
@@ -98,7 +98,7 @@ namespace Radish.DIServices
         /// <summary>
         /// Firing the on db seleced.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The events args</param>
         protected virtual void OnDbSelected(EventArgs e)
         {
             EventHandler handler = DbSelected;
@@ -108,7 +108,7 @@ namespace Radish.DIServices
         /// <summary>
         /// Selects the DB number.
         /// </summary>
-        /// <param name="dbNumber"></param>
+        /// <param name="dbNumber">The db number</param>
         public void SelectDb(int dbNumber)
         {
             this._selectedDb = dbNumber;
@@ -116,11 +116,36 @@ namespace Radish.DIServices
         }
 
         /// <summary>
+        /// Gets the selected Db
+        /// </summary>
+        /// <returns>The selected db number.</returns>
+        public int GetSelectedDb()
+        {
+            return this._selectedDb;
+        }
+
+        /// <summary>
+        /// Gets whether the redis instance is connected.
+        /// </summary>
+        /// <returns>Whether it is connected.</returns>
+        public bool IsConnected()
+        {
+            bool retval = false;
+
+            if (this._redis != null)
+            {
+                retval = true;
+            }
+
+            return retval;
+        }
+
+        /// <summary>
         /// Connection with no additional configuration.
         /// </summary>
-        /// <param name="host"></param>
-        /// <param name="port"></param>
-        /// <returns></returns>
+        /// <param name="host">The host</param>
+        /// <param name="port">The port</param>
+        /// <returns>Whether or not it connected.</returns>
         public bool Connect(string host, int port)
         {
             bool retval = false;
@@ -137,10 +162,10 @@ namespace Radish.DIServices
         /// <summary>
         /// Connection with additional configuration options.
         /// </summary>
-        /// <param name="host"></param>
-        /// <param name="port"></param>
-        /// <param name="configOptions"></param>
-        /// <returns></returns>
+        /// <param name="host">The host</param>
+        /// <param name="port">The port</param>
+        /// <param name="configOptions">The configuration options</param>
+        /// <returns>Whether or not it connected.</returns>
         public bool Connect(string host, int port, ConfigurationOptions configOptions)
         {
             bool retval = true;
@@ -156,7 +181,7 @@ namespace Radish.DIServices
         /// <summary>
         /// Gets all the databases for the redis install.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Get the database list or integers.</returns>
         public List<int> GetDatabases()
         {
             List<int> myDbs = new List<int>();
@@ -179,8 +204,7 @@ namespace Radish.DIServices
         /// <summary>
         /// Gets the keys for a database
         /// </summary>
-        /// <param name="db"></param>
-        /// <returns></returns>
+        /// <returns>The list of keys</returns>
         public List<string> GetKeys()
         {
             List<string> myKeys = new List<string>();
@@ -202,8 +226,8 @@ namespace Radish.DIServices
         /// <summary>
         /// This added string key value.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
+        /// <param name="key">The key</param>
+        /// <param name="value">The value</param>
         public void AddStringKeyValue(string key, string value)
         {
             if (_redis != null)
@@ -221,8 +245,8 @@ namespace Radish.DIServices
         /// <summary>
         /// This gets the string value.
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
+        /// <param name="key">The key</param>
+        /// <returns>the selected string value</returns>
         public string GetStringKeyValue(string key)
         {
             string retval = string.Empty;

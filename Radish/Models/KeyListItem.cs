@@ -14,7 +14,7 @@ namespace Radish.Models
         /// <summary>
         /// This is the key value.
         /// </summary>
-        /// <value></value>
+        /// <value>the key value.</value>
         public string KeyValue {get; set;}
 
         /// <summary>

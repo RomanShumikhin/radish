@@ -1,22 +1,20 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using System;
-using Radish.ViewModels;
 
-namespace Radish.Views.Toolbar
+namespace Radish.Views.Errors
 {
     /// <summary>
-    /// The view for adding the key
+    /// The error window view.
     /// </summary>
-    public class AddKey : Window
+    public class ErrorWindow : Window
     {
         /// <summary>
-        /// The default constructor
+        /// The default constructor.
         /// </summary>
-        public AddKey()
+        public ErrorWindow()
         {
-            DataContext = new AddKeyViewModel();
             InitializeComponent();
         }
 
@@ -32,7 +30,7 @@ namespace Radish.Views.Toolbar
         /// Closes the window.
         /// </summary>
         /// <param name="sender">The sender</param>
-        /// <param name="e">The event args</param>
+        /// <param name="e">The events args</param>
         private void CloseThis(object sender, EventArgs e)
         {
             this.Close();
