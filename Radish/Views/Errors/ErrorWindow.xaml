@@ -8,6 +8,6 @@
         WindowStartupLocation="CenterScreen">
   <StackPanel Spacing="5">
     <TextBlock Text="{Binding ErrorMessage}" TextWrapping="Wrap" />
-    <Button Click="CloseThis">Close</Button>
+    <Button Click="CloseThis" Background="#8c0000">Close</Button>
   </StackPanel>
 </Window>

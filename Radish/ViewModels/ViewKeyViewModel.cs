@@ -55,11 +55,8 @@ namespace Radish.ViewModels
         /// <param name="e">The event args.</param>
         private void KeySelected(object sender, EventArgs e)
         {
-            Console.WriteLine("Selected Key");
             this.SelectedKeyValue = (KeyListItem)sender;
             this.SelectedTextValue = this.SelectedKeyValue.KeyValue;
-            Console.WriteLine("Selected Key: " + this.SelectedKeyValue.KeyName);
-            Console.WriteLine("Selected Value: " + this.SelectedKeyValue.KeyValue);
         }
     }
 }

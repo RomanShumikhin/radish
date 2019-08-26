@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="200"
              xmlns:vm="clr-namespace:Radish.ViewModels;assembly=Radish"
              MinWidth="100" MinHeight="200"
              x:Class="Radish.Keys.KeyList">
@@ -11,8 +11,7 @@
   </Design.DataContext>
   <StackPanel Spacing="5">
     <TextBlock Text="Key List" />
-    <Button Command="{Binding SelectKey}" IsEnabled="{Binding IsButtonEnabled}">Open Key</Button>
-    <Button Command="{Binding RefreshKeys}" IsEnabled="{Binding IsButtonEnabled}">Refresh Keys</Button>
+    <Button Command="{Binding RefreshKeys}" IsEnabled="{Binding IsButtonEnabled}" Background="#005720">Refresh Keys</Button>
     <ListBox Items="{Binding ListOfKeys}" SelectedItem="{Binding SelectedKey}">
       <ListBox.ItemTemplate>
         <DataTemplate>

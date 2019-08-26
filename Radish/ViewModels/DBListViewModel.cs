@@ -77,13 +77,11 @@ namespace Radish.ViewModels
         /// <param name="e">The event arguments.</param>
         private void DbConnected(object sender, EventArgs e)
         {
-            Console.WriteLine("DBList - The db was connected.");
             this.ListOfDbNumbers.Clear();
             foreach (var dbi in _redisConn.GetDatabases())
             {
                 DbListItem item = new DbListItem(dbi);
                 this.ListOfDbNumbers.Add(item);
-                Console.WriteLine("DBList - Added" + dbi.ToString());
             }
         }
 
@@ -95,7 +93,6 @@ namespace Radish.ViewModels
         {
             try
             {
-                Console.WriteLine("Selecting " + this.SelectedDb.DbDisplay);
                 _redisConn.SelectDb(this.SelectedDb.DbNumber);
             }
             catch (Exception ex)

@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="100" d:DesignHeight="450"
              xmlns:vm="clr-namespace:Radish.ViewModels;assembly=Radish"
              MinWidth="100"
              x:Class="Radish.DBList.DBList">
@@ -19,7 +19,7 @@
             </DataTemplate>
           </DropDown.ItemTemplate>
         </DropDown>
-        <Button Command="{Binding OnDbSelected}" IsEnabled="{Binding IsButtonEnabled}">Select</Button>
+        <Button Command="{Binding OnDbSelected}" IsEnabled="{Binding IsButtonEnabled}" Background="#210082">Select</Button>
       </StackPanel>
   </StackPanel>
 </UserControl>
