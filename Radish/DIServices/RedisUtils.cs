@@ -154,7 +154,6 @@ namespace Radish.DIServices
             _host = host;
             _port = port;
             _configOptions = ConfigurationOptions.Parse(_redis.Configuration);
-            Console.WriteLine(_redis.GetStatus());
             this.OnDbConnected(new EventArgs());
             return retval;
         }
@@ -173,7 +172,6 @@ namespace Radish.DIServices
             _host = host;
             _port = port;
             _redis = ConnectionMultiplexer.Connect(_configOptions);
-            Console.WriteLine(_redis.GetStatus());
             this.OnDbConnected(new EventArgs());
             return retval;
         }

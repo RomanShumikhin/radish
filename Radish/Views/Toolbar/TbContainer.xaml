@@ -6,6 +6,6 @@
              x:Class="Radish.Views.Toolbar.TbContainer">
   <StackPanel Orientation="Horizontal">
     <!-- <Button Command="{Binding OnDbSelected}">Select</Button> -->
-    <Button Command="{Binding OnAddKey}" IsEnabled="{Binding IsButtonEnabled}">Add Key</Button>
+    <Button Command="{Binding OnAddKey}" IsEnabled="{Binding IsButtonEnabled}" Background="#210082">Add Key</Button>
   </StackPanel>
 </UserControl>

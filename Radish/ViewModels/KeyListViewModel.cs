@@ -65,7 +65,15 @@ namespace Radish.ViewModels
         public KeyListItem SelectedKey
         {
             get => _selectedKey;
-            set => this.RaiseAndSetIfChanged(ref _selectedKey, value);
+            set 
+            {
+                this.RaiseAndSetIfChanged(ref _selectedKey, value);
+
+                if (value != null)
+                {
+                    this.SelectKey();
+                }
+            }
         }
 
         /// <summary>
@@ -100,13 +108,11 @@ namespace Radish.ViewModels
         public void RefreshKeys()
         {
             this.IsButtonEnabled = true;
-            Console.WriteLine("DBKeys - Key was added");
             this.ListOfKeys.Clear();
             foreach (var key in _redisConn.GetKeys())
             {
                 var keyItem = new KeyListItem(key);
                 this.ListOfKeys.Add(keyItem);
-                Console.WriteLine("Key List - Added: " + key);
             }
         }
 
