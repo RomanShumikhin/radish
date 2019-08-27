@@ -61,6 +61,11 @@ namespace Radish.ViewModels
             window.ShowDialog(Application.Current.MainWindow);
         }
 
+        public void OnFlushKeys()
+        {
+            _redisConn.DeleteKeys();
+        }
+
         /// <summary>
         /// The DB connected event handler
         /// </summary>
