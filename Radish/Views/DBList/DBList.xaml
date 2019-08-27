@@ -9,9 +9,9 @@
   <Design.DataContext>
     <vm:DBListViewModel/>
   </Design.DataContext>
-  <StackPanel>
+  <StackPanel Spacing="5">
       <TextBlock Text="DB List" />
-      <StackPanel Orientation="Horizontal"  Spacing="5">
+      <StackPanel Orientation="Horizontal" Spacing="5">
         <DropDown Items="{Binding ListOfDbNumbers}" SelectedItem="{Binding SelectedDb}">
           <DropDown.ItemTemplate>
             <DataTemplate>

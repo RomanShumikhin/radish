@@ -222,6 +222,26 @@ namespace Radish.DIServices
         }
 
         /// <summary>
+        /// This deletes all the keys in the db.
+        /// </summary>
+        public void DeleteKeys()
+        {
+            if (_redis != null)
+            {
+                var db = _redis.GetDatabase(this._selectedDb);
+                foreach(var key in this.GetKeys())
+                {
+                    db.KeyDelete(key);
+                }
+                this.OnKeyAdded(new EventArgs());
+            }
+            else
+            {
+                throw new Exception("Not Connected to Redis");
+            }
+        }
+
+        /// <summary>
         /// This added string key value.
         /// </summary>
         /// <param name="key">The key</param>

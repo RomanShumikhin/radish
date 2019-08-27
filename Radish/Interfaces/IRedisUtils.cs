@@ -77,6 +77,11 @@ namespace Radish.Interfaces
          List<string> GetKeys();
 
         /// <summary>
+        /// This deletes all the keys in the db.
+        /// </summary>
+        void DeleteKeys();
+
+        /// <summary>
         /// Sets a key value to the selected db
         /// </summary>
         /// <param name="key">The key.</param>

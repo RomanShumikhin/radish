@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Radish.Views.Toolbar.TbContainer">
-  <StackPanel Orientation="Horizontal">
+  <StackPanel Orientation="Horizontal" Spacing="5">
     <!-- <Button Command="{Binding OnDbSelected}">Select</Button> -->
     <Button Command="{Binding OnAddKey}" IsEnabled="{Binding IsButtonEnabled}" Background="#210082">Add Key</Button>
+    <Button Command="{Binding OnFlushKeys}" IsEnabled="{Binding IsButtonEnabled}" Background="#8c0000">Flush Keys</Button>
   </StackPanel>
 </UserControl>
