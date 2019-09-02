@@ -31,6 +31,8 @@ namespace Radish.ViewModels
         /// </summary>
         private KeyListItem _selectedKey;
 
+        private string _filterString = "";
+
         /// <summary>
         /// The constructor for the key List View Model
         /// </summary>
@@ -49,10 +51,27 @@ namespace Radish.ViewModels
         public ObservableCollection<KeyListItem> ListOfKeys { get; }
 
         /// <summary>
+        /// The search string.
+        /// </summary>
+        /// <value>The value you are searching...</value>
+        public string SearchString 
+        { 
+            get
+            {
+                return this._filterString;
+            }
+            set
+            {
+                this._filterString = value;
+                this.SearchKeys();
+            }
+        }
+
+        /// <summary>
         /// The property on whether to allow the clicking of the buttons.
         /// </summary>
         /// <value>The property on whether to allow the clicking of the buttons.</value>
-        public bool IsButtonEnabled 
+        public bool IsButtonEnabled
         {
             get => _isButtonEnabled;
             set => this.RaiseAndSetIfChanged(ref _isButtonEnabled, value);
@@ -65,7 +84,7 @@ namespace Radish.ViewModels
         public KeyListItem SelectedKey
         {
             get => _selectedKey;
-            set 
+            set
             {
                 this.RaiseAndSetIfChanged(ref _selectedKey, value);
 
@@ -83,7 +102,7 @@ namespace Radish.ViewModels
         /// <param name="e">The event args</param>
         private void DbSelected(object sender, EventArgs e)
         {
-            RefreshKeys();
+            SearchKeys();
 
             if (this.ListOfKeys.Count > 0)
             {
@@ -99,17 +118,17 @@ namespace Radish.ViewModels
         /// <param name="e">The event args</param>
         private void DbKeyAdded(object sender, EventArgs e)
         {
-            RefreshKeys();
+            SearchKeys();
         }
 
         /// <summary>
-        /// The method to refresh the keys.
+        /// Searches for the keys.
         /// </summary>
-        public void RefreshKeys()
+        public void SearchKeys()
         {
             this.IsButtonEnabled = true;
             this.ListOfKeys.Clear();
-            foreach (var key in _redisConn.GetKeys())
+            foreach (var key in _redisConn.GetKeys(this._filterString))
             {
                 var keyItem = new KeyListItem(key);
                 this.ListOfKeys.Add(keyItem);
