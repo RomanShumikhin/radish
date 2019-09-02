@@ -19,8 +19,8 @@
     <PackageReference Include="Avalonia" Version="0.8.2" />
     <PackageReference Include="Avalonia.Desktop" Version="0.8.2" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.2" />
-    <PackageReference Include="Splat" Version="8.2.4" />
-    <PackageReference Include="Splat.Autofac" Version="8.2.4" />
+    <PackageReference Include="Splat" Version="8.3.1" />
+    <PackageReference Include="Splat.Autofac" Version="8.3.1" />
     <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
   </ItemGroup>
 </Project>

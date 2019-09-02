@@ -55,7 +55,7 @@ namespace Radish.ViewModels
         {
             var window = new AddKey()
             {
-                DataContext = new TbContainerViewModel()
+                DataContext = new AddKeyViewModel()
             };
 
             window.ShowDialog(Application.Current.MainWindow);
