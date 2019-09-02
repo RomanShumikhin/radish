@@ -11,7 +11,8 @@
   </Design.DataContext>
   <StackPanel Spacing="5">
     <TextBlock Text="Key List" />
-    <Button Command="{Binding RefreshKeys}" IsEnabled="{Binding IsButtonEnabled}" Background="#005720">Refresh Keys</Button>
+    <TextBox Watermark="Filter" Text="{Binding SearchString}" IsEnabled="{Binding IsButtonEnabled}" />
+    <Button Command="{Binding SearchKeys}" IsEnabled="{Binding IsButtonEnabled}" Background="#005720">Refresh Keys</Button>
     <ListBox Items="{Binding ListOfKeys}" SelectedItem="{Binding SelectedKey}">
       <ListBox.ItemTemplate>
         <DataTemplate>

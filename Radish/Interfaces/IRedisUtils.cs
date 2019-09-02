@@ -77,6 +77,13 @@ namespace Radish.Interfaces
          List<string> GetKeys();
 
         /// <summary>
+        /// Searches for the keys
+        /// </summary>
+        /// <param name="searchKey">The key id.</param>
+        /// <returns>The list of keys</returns>
+        List<string> GetKeys(string searchKey);
+
+        /// <summary>
         /// This deletes all the keys in the db.
         /// </summary>
         void DeleteKeys();

@@ -222,6 +222,29 @@ namespace Radish.DIServices
         }
 
         /// <summary>
+        /// Searches for the keys
+        /// </summary>
+        /// <param name="searchKey">The key id.</param>
+        /// <returns>The list of keys</returns>
+        public List<string> GetKeys(string searchKey)
+        {
+            List<string> myKeys = new List<string>();
+            if (_redis != null)
+            {
+                foreach (var key in _redis.GetServer(_host, _port).Keys(this._selectedDb, pattern: "*" + searchKey.Trim() + "*"))
+                {
+                    myKeys.Add(key);
+                }
+            }
+            else
+            {
+                throw new Exception("Not Connected to Redis");
+            }
+
+            return myKeys;
+        }
+
+        /// <summary>
         /// This deletes all the keys in the db.
         /// </summary>
         public void DeleteKeys()

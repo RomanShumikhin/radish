@@ -12,7 +12,7 @@
   <StackPanel Spacing="5">
       <TextBlock Text="DB List" />
       <StackPanel Orientation="Horizontal" Spacing="5">
-        <DropDown Items="{Binding ListOfDbNumbers}" SelectedItem="{Binding SelectedDb}">
+        <DropDown Items="{Binding ListOfDbNumbers}" SelectedItem="{Binding SelectedDb}" MinWidth="10">
           <DropDown.ItemTemplate>
             <DataTemplate>
               <TextBlock Text="{Binding DbDisplay}" />
