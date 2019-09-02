@@ -1,5 +1,5 @@
 # Introduction 
-Radish is an open source simple client for accessing a Redis db. It is built using .Net Core and Avalonia so it works on Windows, Mac, and Linux.
+Radish is a simple client for accessing Redis. It is built using .Net Core and Avalonia so it works on Windows, Mac, and Linux.
 
 # Build and Test
 0. Install .Net Core 2.2 SDK or greater.
@@ -16,6 +16,3 @@ Things this project needs:
 - Some graphics for the UI would be excellent!
 - Some other people to help flesh out the following features: login with PEM, styling, and other items as needed.
 - Feedback on features needed is also very nice.
-
-# Notes
-I have no interest in making this a commercial project where there is a charge for licensing.
