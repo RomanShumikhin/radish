@@ -229,7 +229,7 @@ namespace Radish.DIServices
             if (_redis != null)
             {
                 var db = _redis.GetDatabase(this._selectedDb);
-                foreach(var key in this.GetKeys())
+                foreach (var key in this.GetKeys())
                 {
                     db.KeyDelete(key);
                 }
@@ -281,6 +281,24 @@ namespace Radish.DIServices
             }
 
             return retval;
+        }
+
+        /// <summary>
+        /// Deletes a key from Redis
+        /// </summary>
+        /// <param name="key">The key name.</param>
+        public void DeleteKey(string key)
+        {
+            if (_redis != null)
+            {
+                var db = _redis.GetDatabase(this._selectedDb);
+                db.KeyDelete(key);
+                this.OnKeyAdded(new EventArgs());
+            }
+            else
+            {
+                throw new Exception("Not Connected to Redis");
+            }
         }
     }
 }
