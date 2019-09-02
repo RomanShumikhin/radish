@@ -94,5 +94,11 @@ namespace Radish.Interfaces
         /// <param name="key">The key</param>
         /// <returns>The key string value.</returns>
          string GetStringKeyValue(string key);
+
+        /// <summary>
+        /// The method to delete a key.
+        /// </summary>
+        /// <param name="key">The key name.</param>
+         void DeleteKey(string key);
     }
 }
