@@ -14,7 +14,7 @@ I have been adding features as I need them, but I would like to make it full fea
 
 Things this project needs:
 - Some graphics for the UI would be excellent!
-- Some other people to help flesh out the following features: login with PEM, since filters for large key environments, and other items as needed.
+- Some other people to help flesh out the following features: login with PEM, styling, and other items as needed.
 - Feedback on features needed is also very nice.
 
 # Notes
