@@ -9,6 +9,14 @@ Radish is a simple client for accessing Redis. It is built using .Net Core and A
 4. Build the project - dotnet build.
 5. Run it - dotnet run.
 
+# Deploy
+If you want to deploy the project, here are the commands.  Execute these from the radish/Radish directory.
+- Linux: dotnet publish --self-contained --runtime linux-x64 --output /path/to/directory
+- Windows: dotnet publish --self-contained --runtime win-x64 --output C:\path\to\directory
+- Mac: dotnet publish --self-contained --runtime osx-x64 --output /path/to/directory
+
+You can see the entire RID catalog here: https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
+
 # Contribute
 I have been adding features as I need them, but I would like to make it full featured.  If you want to contribute, please feel free to contact me.  I am always appreciative of people who can help out on stuff like this.
 
