@@ -1,6 +1,7 @@
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using Radish.Models;
 
 namespace Radish.Interfaces
 {
@@ -40,6 +41,8 @@ namespace Radish.Interfaces
         /// </summary>
         /// <returns></returns>
         bool IsConnected();
+
+        AddressAndPort GetBaseConnInfo();
 
         /// <summary>
         /// Selects the DB number.
@@ -107,5 +110,12 @@ namespace Radish.Interfaces
         /// </summary>
         /// <param name="key">The key name.</param>
          void DeleteKey(string key);
+
+        /// <summary>
+        /// This updates the key in redis.
+        /// </summary>
+        /// <param name="key">The Key</param>
+        /// <param name="value">The Value</param>
+         void UpdateStringKeyValue(string key, string value);
     }
 }

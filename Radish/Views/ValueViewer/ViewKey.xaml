@@ -10,6 +10,14 @@
         <vm:ConnWindowViewModel/>
   </Design.DataContext>
   <Grid Margin="4">
-      <TextBox Text="{Binding SelectedTextValue}" AcceptsReturn="True" TextWrapping="Wrap" />
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="100*" MinWidth="100"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="350*" MinHeight="350"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <TextBox Text="{Binding SelectedTextValue}" AcceptsReturn="True" TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" />
+      <Button Command="{Binding OnUpdateValue}" IsEnabled="{Binding IsButtonEnabled}" Background="#210082" Grid.Column="0" Grid.Row="1">Save</Button>
   </Grid>
 </UserControl>

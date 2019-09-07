@@ -30,6 +30,12 @@ namespace Radish.ViewModels
         private string _selectedTextValue;
 
         /// <summary>
+        /// The property on whether to allow the clicking of the buttons.
+        /// </summary>
+        /// <value>The property on whether to allow the clicking of the buttons.</value>
+        private bool _isButtonEnabled = false;
+
+        /// <summary>
         /// The selected text value property.
         /// </summary>
         /// <value>The selected text value.</value>
@@ -37,6 +43,16 @@ namespace Radish.ViewModels
         {
             get => _selectedTextValue;
             set => this.RaiseAndSetIfChanged(ref _selectedTextValue, value);
+        }
+
+        /// <summary>
+        /// The property on whether to allow the clicking of the buttons.
+        /// </summary>
+        /// <value>The property on whether to allow the clicking of the buttons.</value>
+        public bool IsButtonEnabled 
+        {
+            get => _isButtonEnabled;
+            set => this.RaiseAndSetIfChanged(ref _isButtonEnabled, value);
         }
 
         /// <summary>
@@ -57,6 +73,15 @@ namespace Radish.ViewModels
         {
             this.SelectedKeyValue = (KeyListItem)sender;
             this.SelectedTextValue = this.SelectedKeyValue.KeyValue;
+            this.IsButtonEnabled = true;
+        }
+
+        /// <summary>
+        /// Updates the value.
+        /// </summary>
+        private void OnUpdateValue()
+        {
+            _redisConn.UpdateStringKeyValue(this.SelectedKeyValue.KeyName, this.SelectedTextValue);
         }
     }
 }

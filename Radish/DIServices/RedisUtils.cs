@@ -3,6 +3,7 @@ using Radish.Models;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Radish.DIServices
 {
@@ -140,6 +141,19 @@ namespace Radish.DIServices
             return retval;
         }
 
+        public AddressAndPort GetBaseConnInfo()
+        {
+            AddressAndPort retval = new AddressAndPort();
+
+            if (this._redis != null)
+            {
+                retval.Address = this._host;
+                retval.Port = this._port;
+            }
+
+            return retval;
+        }
+
         /// <summary>
         /// Connection with no additional configuration.
         /// </summary>
@@ -208,7 +222,7 @@ namespace Radish.DIServices
             List<string> myKeys = new List<string>();
             if (_redis != null)
             {
-                foreach (var key in _redis.GetServer(_host, _port).Keys(this._selectedDb))
+                foreach (var key in _redis.GetServer(_host, _port).Keys(this._selectedDb).OrderBy(a => a))
                 {
                     myKeys.Add(key);
                 }
@@ -317,6 +331,27 @@ namespace Radish.DIServices
                 var db = _redis.GetDatabase(this._selectedDb);
                 db.KeyDelete(key);
                 this.OnKeyAdded(new EventArgs());
+            }
+            else
+            {
+                throw new Exception("Not Connected to Redis");
+            }
+        }
+
+        /// <summary>
+        /// This updates the key in redis.
+        /// </summary>
+        /// <param name="key">The Key</param>
+        /// <param name="value">The Value</param>
+        public void UpdateStringKeyValue(string key, string value)
+        {
+            string retval = string.Empty;
+
+            if (_redis != null)
+            {
+                var db = _redis.GetDatabase(this._selectedDb);
+                retval = db.StringGet(key);
+                db.StringSet(key, value);
             }
             else
             {
