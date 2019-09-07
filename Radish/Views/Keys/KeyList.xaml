@@ -9,16 +9,25 @@
   <Design.DataContext>
     <vm:KeyListViewModel/>
   </Design.DataContext>
-  <StackPanel Spacing="5">
-    <TextBlock Text="Key List" />
-    <TextBox Watermark="Filter" Text="{Binding SearchString}" IsEnabled="{Binding IsButtonEnabled}" />
-    <Button Command="{Binding SearchKeys}" IsEnabled="{Binding IsButtonEnabled}" Background="#005720">Refresh Keys</Button>
-    <ListBox Items="{Binding ListOfKeys}" SelectedItem="{Binding SelectedKey}">
+  <Grid Margin="4">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="150*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="100*" MinHeight="100" MaxHeight="300" />
+    </Grid.RowDefinitions>
+    <TextBlock Text="Key List" Grid.Row="0" Grid.Column="0" />
+    <TextBox Watermark="Filter" Text="{Binding SearchString}" IsEnabled="{Binding IsButtonEnabled}" Grid.Row="1" Grid.Column="0" />
+    <Button Command="{Binding SearchKeys}" IsEnabled="{Binding IsButtonEnabled}" Background="#005720" Grid.Row="2" Grid.Column="0">Refresh Keys</Button>
+    <ListBox Items="{Binding ListOfKeys}" SelectedItem="{Binding SelectedKey}" Grid.Row="3" Grid.Column="0">
       <ListBox.ItemTemplate>
         <DataTemplate>
           <TextBlock Text="{Binding KeyName}" />
         </DataTemplate>
       </ListBox.ItemTemplate>
     </ListBox>
-  </StackPanel>
+  </Grid>
 </UserControl>

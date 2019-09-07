@@ -2,6 +2,7 @@ using System;
 using Avalonia;
 using Radish.Interfaces;
 using Radish.Views.Errors;
+using ReactiveUI;
 using Splat;
 
 namespace Radish.ViewModels
@@ -17,6 +18,21 @@ namespace Radish.ViewModels
         public readonly IRedisUtils _redisConn;
 
         /// <summary>
+        /// Whether or not the user has logged in.
+        /// </summary>
+        private bool _isLoggedIn = false;
+
+        /// <summary>
+        /// Whether or not the user has logged in.
+        /// </summary>
+        /// <value>Whether or not the user has logged in</value>
+        public bool IsLoggedIn 
+        {
+            get => _isLoggedIn;
+            set => this.RaiseAndSetIfChanged(ref _isLoggedIn, value);
+        }
+
+        /// <summary>
         /// The conn window view model
         /// </summary>
         public ConnWindowViewModel()
@@ -24,6 +40,13 @@ namespace Radish.ViewModels
             _redisConn = Locator.Current.GetService<IRedisUtils>();
             this.Host = "localhost";
             this.Port = "6379";
+
+            this.IsLoggedIn = _redisConn.IsConnected();
+            if (this.IsLoggedIn == true)
+            {
+                this.Host = _redisConn.GetBaseConnInfo().Address;
+                this.Port = _redisConn.GetBaseConnInfo().Port.ToString();
+            }
         }
 
         /// <summary>
@@ -44,16 +67,11 @@ namespace Radish.ViewModels
             try
             {
                 _redisConn.Connect(this.Host, Convert.ToInt32(this.Port));
-
-                var window = new ErrorWindow()
-                {
-                    DataContext = new ErrorWindowViewModel("Message", "Connection Successful")
-                };
-
-                window.ShowDialog(Application.Current.MainWindow);
+                this.IsLoggedIn = _redisConn.IsConnected();
             }
             catch (Exception ex)
             {
+                this.IsLoggedIn = false;
                 var window = new ErrorWindow()
                 {
                     DataContext = new ErrorWindowViewModel("Error", ex.Message)
