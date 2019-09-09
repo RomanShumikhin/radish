@@ -219,12 +219,16 @@ namespace Radish.DIServices
         /// <returns>The list of keys</returns>
         public List<string> GetKeys()
         {
+            var db = _redis.GetDatabase(this._selectedDb);
             List<string> myKeys = new List<string>();
             if (_redis != null)
             {
-                foreach (var key in _redis.GetServer(_host, _port).Keys(this._selectedDb).OrderBy(a => a))
+                foreach (var key in _redis.GetServer(_host, _port).Keys(this._selectedDb))
                 {
-                    myKeys.Add(key);
+                    if (db.KeyType(key) == RedisType.String)
+                    {
+                        myKeys.Add(key);
+                    }
                 }
             }
             else
@@ -242,12 +246,16 @@ namespace Radish.DIServices
         /// <returns>The list of keys</returns>
         public List<string> GetKeys(string searchKey)
         {
+            var db = _redis.GetDatabase(this._selectedDb);
             List<string> myKeys = new List<string>();
             if (_redis != null)
             {
                 foreach (var key in _redis.GetServer(_host, _port).Keys(this._selectedDb, pattern: "*" + searchKey.Trim() + "*"))
                 {
-                    myKeys.Add(key);
+                    if (db.KeyType(key) == RedisType.String)
+                    {
+                        myKeys.Add(key);
+                    }
                 }
             }
             else
