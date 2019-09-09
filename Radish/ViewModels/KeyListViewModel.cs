@@ -7,6 +7,7 @@ using Radish.Models;
 using Radish.Views.Errors;
 using Splat;
 using ReactiveUI;
+using StackExchange.Redis;
 
 namespace Radish.ViewModels
 {
@@ -130,8 +131,7 @@ namespace Radish.ViewModels
             this.ListOfKeys.Clear();
             foreach (var key in _redisConn.GetKeys(this._filterString))
             {
-                var keyItem = new KeyListItem(key);
-                this.ListOfKeys.Add(keyItem);
+                this.ListOfKeys.Add(key);
             }
         }
 
@@ -142,7 +142,16 @@ namespace Radish.ViewModels
         {
             try
             {
-                _redisConn.GetStringKeyValue(SelectedKey.KeyName);
+                switch(SelectedKey.KeyRedisType)
+                {
+                    case RedisType.String:
+                        _redisConn.GetStringKeyValue(SelectedKey.KeyName);
+                        break;
+                    default:
+                        Console.WriteLine("More data types to be supported.");
+                        break;
+                } 
+                
             }
             catch (Exception ex)
             {
