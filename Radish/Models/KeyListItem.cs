@@ -1,3 +1,5 @@
+using StackExchange.Redis;
+
 namespace Radish.Models
 {
     /// <summary>
@@ -15,15 +17,22 @@ namespace Radish.Models
         /// This is the key value.
         /// </summary>
         /// <value>the key value.</value>
-        public string KeyValue {get; set;}
+        public string KeyValue {get; private set;}
+
+        /// <summary>
+        /// This is the redis type for the keys.
+        /// </summary>
+        /// <value>redis type for the key</value>
+        public RedisType KeyRedisType {get; private set;}
 
         /// <summary>
         /// The constructor for the key list item.
         /// </summary>
         /// <param name="key"></param>
-        public KeyListItem(string key)
+        public KeyListItem(string key, RedisType keyRedisType)
         {
             this.KeyName = key;
+            this.KeyRedisType = keyRedisType;
         }
 
         /// <summary>
@@ -31,10 +40,11 @@ namespace Radish.Models
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public KeyListItem(string key, string value)
+        public KeyListItem(string key, string value, RedisType keyRedisType)
         {
             this.KeyName = key;
             this.KeyValue = value;
+            this.KeyRedisType = keyRedisType;
         }
     }
 }

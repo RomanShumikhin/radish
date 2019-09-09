@@ -217,18 +217,16 @@ namespace Radish.DIServices
         /// Gets the keys for a database
         /// </summary>
         /// <returns>The list of keys</returns>
-        public List<string> GetKeys()
+        public List<KeyListItem> GetKeys()
         {
             var db = _redis.GetDatabase(this._selectedDb);
-            List<string> myKeys = new List<string>();
+            List<KeyListItem> myKeys = new List<KeyListItem>();
             if (_redis != null)
             {
                 foreach (var key in _redis.GetServer(_host, _port).Keys(this._selectedDb))
                 {
-                    if (db.KeyType(key) == RedisType.String)
-                    {
-                        myKeys.Add(key);
-                    }
+                    KeyListItem item = new KeyListItem(key, db.KeyType(key));
+                    myKeys.Add(item);
                 }
             }
             else
@@ -244,18 +242,16 @@ namespace Radish.DIServices
         /// </summary>
         /// <param name="searchKey">The key id.</param>
         /// <returns>The list of keys</returns>
-        public List<string> GetKeys(string searchKey)
+        public List<KeyListItem> GetKeys(string searchKey)
         {
             var db = _redis.GetDatabase(this._selectedDb);
-            List<string> myKeys = new List<string>();
+            List<KeyListItem> myKeys = new List<KeyListItem>();
             if (_redis != null)
             {
                 foreach (var key in _redis.GetServer(_host, _port).Keys(this._selectedDb, pattern: "*" + searchKey.Trim() + "*"))
                 {
-                    if (db.KeyType(key) == RedisType.String)
-                    {
-                        myKeys.Add(key);
-                    }
+                    KeyListItem item = new KeyListItem(key, db.KeyType(key));
+                    myKeys.Add(item);
                 }
             }
             else
@@ -276,7 +272,7 @@ namespace Radish.DIServices
                 var db = _redis.GetDatabase(this._selectedDb);
                 foreach (var key in this.GetKeys())
                 {
-                    db.KeyDelete(key);
+                    db.KeyDelete(key.KeyName);
                 }
                 this.OnKeyAdded(new EventArgs());
             }
@@ -318,7 +314,7 @@ namespace Radish.DIServices
             {
                 var db = _redis.GetDatabase(this._selectedDb);
                 retval = db.StringGet(key);
-                this.OnKeySelected(new KeyListItem(key, retval), new EventArgs());
+                this.OnKeySelected(new KeyListItem(key, retval, db.KeyType(key)), new EventArgs());
             }
             else
             {
