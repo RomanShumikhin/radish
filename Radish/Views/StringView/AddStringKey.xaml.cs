@@ -4,19 +4,19 @@ using Avalonia.Markup.Xaml;
 using System;
 using Radish.ViewModels;
 
-namespace Radish.Views.Toolbar
+namespace Radish.Views.StringView
 {
     /// <summary>
     /// The view for adding the key
     /// </summary>
-    public class AddKey : Window
+    public class AddStringKey : Window
     {
         /// <summary>
         /// The default constructor
         /// </summary>
-        public AddKey()
+        public AddStringKey()
         {
-            DataContext = new AddKeyViewModel();
+            DataContext = new AddStringKeyViewModel();
             InitializeComponent();
         }
 

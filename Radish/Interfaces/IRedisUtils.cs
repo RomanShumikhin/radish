@@ -28,7 +28,7 @@ namespace Radish.Interfaces
         /// <summary>
         /// This is the event for selecting a key.
         /// </summary>
-         event EventHandler KeySelected;
+         event EventHandler StringKeySelected;
 
         /// <summary>
         /// Gets the selected Db
@@ -117,5 +117,9 @@ namespace Radish.Interfaces
         /// <param name="key">The Key</param>
         /// <param name="value">The Value</param>
          void UpdateStringKeyValue(string key, string value);
+
+         void IncrementStringKeyValue(string key);
+
+         void DecrementStringKeyValue(string key);
     }
 }

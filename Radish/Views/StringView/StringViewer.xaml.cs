@@ -3,19 +3,19 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Radish.ViewModels;
 
-namespace Radish.Views.ValueViewer
+namespace Radish.Views.StringView
 {
     /// <summary>
     /// The view for the keys.
     /// </summary>
-    public class ViewKey : UserControl
+    public class StringViewer : UserControl
     {
         /// <summary>
         /// The default construstor.
         /// </summary>
-        public ViewKey()
+        public StringViewer()
         {
-            DataContext = new ViewKeyViewModel();
+            DataContext = new ViewStringKeyViewModel();
             InitializeComponent();
         }
 

@@ -26,6 +26,12 @@ namespace Radish.Models
         public RedisType KeyRedisType {get; private set;}
 
         /// <summary>
+        /// Whether or not it is a numeric value.
+        /// </summary>
+        /// <value>Whether or not it is a numeric value.</value>
+        public bool IsNumeric {get; private set;}
+
+        /// <summary>
         /// The constructor for the key list item.
         /// </summary>
         /// <param name="key"></param>
@@ -40,11 +46,12 @@ namespace Radish.Models
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public KeyListItem(string key, string value, RedisType keyRedisType)
+        public KeyListItem(string key, string value, bool isNumeric, RedisType keyRedisType)
         {
             this.KeyName = key;
             this.KeyValue = value;
             this.KeyRedisType = keyRedisType;
+            this.IsNumeric = isNumeric;
         }
     }
 }

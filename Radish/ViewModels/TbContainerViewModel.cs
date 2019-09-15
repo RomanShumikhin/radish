@@ -9,6 +9,7 @@ using Radish.ViewModels.ConnWindow;
 using Avalonia;
 using Radish.Views.Toolbar;
 using Radish.Models;
+using Radish.Views.StringView;
 
 namespace Radish.ViewModels
 {
@@ -45,7 +46,7 @@ namespace Radish.ViewModels
         {
             _redisConn = Locator.Current.GetService<IRedisUtils>();
             _redisConn.DbSelected += DbSelected;
-            _redisConn.KeySelected += KeySelected;
+            _redisConn.StringKeySelected += KeySelected;
             _redisConn.KeyAdded += DbKeyAdded;
         }
 
@@ -67,21 +68,6 @@ namespace Radish.ViewModels
         {
             get => _isDeleteButtonEnabled;
             set => this.RaiseAndSetIfChanged(ref _isDeleteButtonEnabled, value);
-        }
-
-        /// <summary>
-        /// The DB connected event handler
-        /// </summary>
-        /// <param name="sender">The sender</param>
-        /// <param name="e">The event args</param>
-        public void OnAddKey()
-        {
-            var window = new AddKey()
-            {
-                DataContext = new AddKeyViewModel()
-            };
-
-            window.ShowDialog(Application.Current.MainWindow);
         }
 
         /// <summary>
