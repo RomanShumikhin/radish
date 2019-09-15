@@ -4,7 +4,7 @@
         xmlns:dblist="clr-namespace:Radish.DBList;assembly=Radish"
         xmlns:keylist="clr-namespace:Radish.Keys;assembly=Radish"
         xmlns:tb="clr-namespace:Radish.Views.Toolbar;assembly=Radish"
-        xmlns:kv="clr-namespace:Radish.Views.ValueViewer;assembly=Radish"
+        xmlns:sv="clr-namespace:Radish.Views.StringView;assembly=Radish"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -42,6 +42,25 @@
 
         <tb:TbContainer Grid.Row="1" Grid.Column="1" />
         
-        <kv:ViewKey Grid.Row="2" Grid.Column="1" />
+        <TabControl Grid.Row="2" Grid.Column="1">
+            <TabItem Header="String">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300*" MinWidth="300"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="100*" MinHeight="350" />
+                    </Grid.RowDefinitions>
+                
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="4">
+                        <Button Command="{Binding OnAddKey}" IsEnabled="{Binding IsButtonEnabled}" Background="#210082">Add Key</Button>
+                        <Button Command="{Binding OnIncrementString}" IsEnabled="{Binding IsIncrButtonEnabled}" Background="#210082">Increment</Button>
+                        <Button Command="{Binding OnDecrementString}" IsEnabled="{Binding IsIncrButtonEnabled}" Background="#210082">Decrement</Button>
+                    </StackPanel>
+                    <sv:StringViewer Grid.Row="1" Grid.Column="0" />
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

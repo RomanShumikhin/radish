@@ -55,7 +55,7 @@ namespace Radish.DIServices
         /// <summary>
         /// The key is selected
         /// </summary>
-        public event EventHandler KeySelected;
+        public event EventHandler StringKeySelected;
 
         /// <summary>
         /// The redis utils constructor
@@ -70,9 +70,9 @@ namespace Radish.DIServices
         /// </summary>
         /// <param name="value">the key value.</param>
         /// <param name="e">The events args</param>
-        protected virtual void OnKeySelected(KeyListItem value, EventArgs e)
+        protected virtual void OnStringKeySelected(KeyListItem value, EventArgs e)
         {
-            EventHandler handler = KeySelected;
+            EventHandler handler = StringKeySelected;
             handler?.Invoke(value, e);
         }
 
@@ -314,7 +314,8 @@ namespace Radish.DIServices
             {
                 var db = _redis.GetDatabase(this._selectedDb);
                 retval = db.StringGet(key);
-                this.OnKeySelected(new KeyListItem(key, retval, db.KeyType(key)), new EventArgs());
+                var isNumeric = int.TryParse(retval, out int n);
+                this.OnStringKeySelected(new KeyListItem(key, retval, isNumeric, db.KeyType(key)), new EventArgs());
             }
             else
             {
@@ -356,6 +357,44 @@ namespace Radish.DIServices
                 var db = _redis.GetDatabase(this._selectedDb);
                 retval = db.StringGet(key);
                 db.StringSet(key, value);
+            }
+            else
+            {
+                throw new Exception("Not Connected to Redis");
+            }
+        }
+
+        public void IncrementStringKeyValue(string key)
+        {
+            string retval = string.Empty;
+
+            if (_redis != null)
+            {
+                var db = _redis.GetDatabase(this._selectedDb);
+                retval = db.StringGet(key);
+                db.StringIncrement(key);
+                retval = db.StringGet(key);
+                var isNumeric = int.TryParse(retval, out int n);
+                this.OnStringKeySelected(new KeyListItem(key, retval, isNumeric, db.KeyType(key)), new EventArgs());
+            }
+            else
+            {
+                throw new Exception("Not Connected to Redis");
+            }
+        }
+
+        public void DecrementStringKeyValue(string key)
+        {
+            string retval = string.Empty;
+
+            if (_redis != null)
+            {
+                var db = _redis.GetDatabase(this._selectedDb);
+                retval = db.StringGet(key);
+                db.StringDecrement(key);
+                retval = db.StringGet(key);
+                var isNumeric = int.TryParse(retval, out int n);
+                this.OnStringKeySelected(new KeyListItem(key, retval, isNumeric, db.KeyType(key)), new EventArgs());
             }
             else
             {

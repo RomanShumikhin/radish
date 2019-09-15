@@ -11,7 +11,7 @@ namespace Radish.ViewModels
     /// <summary>
     /// This is the view model for the key view.
     /// </summary>
-    public class ViewKeyViewModel : ViewModelBase
+    public class ViewStringKeyViewModel : ViewModelBase
     {
         /// <summary>
         /// The redis utility.
@@ -58,10 +58,10 @@ namespace Radish.ViewModels
         /// <summary>
         /// The constructor for the key view model.
         /// </summary>
-        public ViewKeyViewModel()
+        public ViewStringKeyViewModel()
         {
             _redisConn = Locator.Current.GetService<IRedisUtils>();
-            _redisConn.KeySelected += KeySelected;
+            _redisConn.StringKeySelected += KeySelected;
         }
 
         /// <summary>
