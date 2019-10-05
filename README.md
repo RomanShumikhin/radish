@@ -2,7 +2,7 @@
 Radish is a simple client for accessing Redis. It is built using .Net Core and Avalonia so it works on Windows, Mac, and Linux.
 
 # Build and Test
-0. Install .Net Core 2.2 SDK or greater.
+0. Install .Net Core 3.0 SDK or greater.
 1. Clone the software - git clone https://github.com/cmbyerly/radish.git
 2. cd to radish/Radish subdirectory.
 3. Restore the NuGet packages - dotnet restore.
